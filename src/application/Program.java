@@ -3,8 +3,6 @@ package application;
 import java.util.Locale;
 import java.util.Scanner;
 
-
-
 import entities.Account;
 
 public class Program {
@@ -28,14 +26,13 @@ public class Program {
 		System.out.println();
 		System.out.print("Enter amount for withdraw: ");
 		double amount = sc.nextDouble();
+	
 		
-		if (amount > acc.getWithdrawLimit()) {
-			System.out.println("Withdraw Error: The amount excees withdraw limit");
-			
-		}else if (amount > acc.getBalance()) {
-			
-			System.out.println("Withdraw Error: not enough balance");
-		}else {
+		String error = acc.validateWithdraw(amount);
+		if ( error !=null) {
+			System.out.println(error);
+		}		
+	else {
 			acc.withdraw(amount);
 			System.out.printf("Novo saldo: %.2f%n" , acc.getBalance());
 			

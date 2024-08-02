@@ -1,14 +1,14 @@
 package entities;
 
 public class Account {
-	
-	Integer number ;
-	String holder ;
+
+	Integer number;
+	String holder;
 	Double balance;
-	Double  withdrawLimit;
-	
+	Double withdrawLimit;
+
 	public Account() {
-		
+
 	}
 
 	public Account(Integer number, String holder, Double balance, Double withdrawLimit) {
@@ -49,13 +49,26 @@ public class Account {
 	public void setWithdrawLimit(Double withdrawLimit) {
 		this.withdrawLimit = withdrawLimit;
 	}
-	
-	public void deposit (Double amount) {
+
+	public void deposit(Double amount) {
 		balance += amount;
 	}
-	
-	public void withdraw (Double amount) {
-		balance += amount;
+
+	public void withdraw(Double amount) {
+		balance -= amount;
+	}
+
+	public String validateWithdraw(double amount) {
+		
+		if (amount > getWithdrawLimit()) {
+			return "Withdraw Error: The amount exceeds withdraw limit";
+		}	
+		if(amount > getBalance()) {
+			
+			return "Withdraw Error: not enough balance";
+		}
+		return null;
+		
 	}
 	
 	
